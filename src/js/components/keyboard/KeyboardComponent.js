@@ -5,6 +5,7 @@ import { NotionToMonitor } from '../../UI/notionToMonitor';
 import { cursorPositionAndTextarea } from '../monitor/monitor.fn';
 import Microphone from '../../../assets/img/microphone.svg'
 import { recognition } from '../../API/SpeechRecoginition';
+import { createKeyBoard } from './keyboard.templates';
 
 import {
   changeMonitorSize,
@@ -13,7 +14,6 @@ import {
   itIsCaps, itIsLang, itIsSound, keyIsEnterSpaceTab, keyIsLangCapsSoundShiftBackspace, playSound,
 } from './keyboard.fn';
 import { toggleClassActive, toggleClassesActive } from './keyboard.fn.utils';
-import { createKeyBoard } from './keyboard.templates';
 
 export class KeyboardComponent extends KeyBoardStateComponent {
   static className = 'key-bord__clava'
@@ -46,8 +46,7 @@ export class KeyboardComponent extends KeyBoardStateComponent {
       this.$root = await createKeyBoard(this.$root)
       itIsLang(this.store, true)
     } catch {
-      // eslint-disable-next-line no-console
-      console.warn('Error in painting LangBTN on initial state')
+      throw new Error('Error in painting LangBTN on initial state')
     }
   }
 

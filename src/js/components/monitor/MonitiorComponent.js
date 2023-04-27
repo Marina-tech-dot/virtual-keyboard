@@ -1,9 +1,10 @@
+/* eslint-disable no-console */
 import { KeyBoardComponent } from '../../core/KeyBoardComponent';
 import { createMonitor } from './monitor.template';
 import * as actions from '../../redux/actions';
 import { $ } from '../../core/dom';
 import {
-  addClickedKey, cursorPositionAndTextarea, lightPressedKey, setCaretToPos,
+  isKeyOnVirtualKeyboard, addClickedKey, cursorPositionAndTextarea, lightPressedKey, setCaretToPos,
 } from './monitor.fn';
 import {
   fireCapsLangShift,
@@ -94,6 +95,7 @@ export class MonitorComponent extends KeyBoardComponent {
   }
 
   addToLS(value) {
+    console.log(value)
     this.$dispatch(actions.addToLS({
       value,
     }))
@@ -122,8 +124,12 @@ export class MonitorComponent extends KeyBoardComponent {
   }
 
   onKeydown(event) {
+    // eslint-disable-next-line no-console
+    console.log(isKeyOnVirtualKeyboard(event.key))
+    // if (isKeyOnVirtualKeyboard(event) === false) return
     this.$emit('monic:pressedKey')
     const pressedKey = event.key
+
     playSound(event, this.store)
 
     if (pressedKey === 'Tab') {

@@ -2,6 +2,12 @@ import { $ } from '../../core/dom'
 import { unCapitalize } from '../../core/utils'
 import { keysChangerList } from '../keyboard/keyboardKeys'
 
+export function isKeyOnVirtualKeyboard(key) {
+  const keyOnVirtKeyboard = Object.entries(keysChangerList.ru).flat()
+    .concat(Object.entries(keysChangerList.simbols).flat());
+  return keyOnVirtKeyboard.includes(key)
+}
+
 export function lightPressedKey(event) {
   let pressedKey = event.key
   const lang = { Lang: '' }

@@ -1,5 +1,5 @@
 import '../scss/style.scss';
-import { addWrapper } from './script.utils';
+import { addWrapper, addInfoBlock } from './script.utils';
 import { VirtualKeyboard } from './components/virtualKeyboard/VirtualKeyboard';
 import { MonitorComponent } from './components/monitor/MonitiorComponent';
 import { KeyboardComponent } from './components/keyboard/KeyboardComponent';
@@ -21,3 +21,5 @@ const virtualKeyboard = new VirtualKeyboard('#keyboard', {
   store,
 });
 virtualKeyboard.render();
+
+addInfoBlock()

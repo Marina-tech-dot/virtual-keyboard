@@ -1,6 +1,6 @@
 import { $ } from './core/dom'
 
-const wrapperTemplate = () => `
+const wrapperTempl = () => `
     <div class="wrapper">
     <main class="key-bord" id="keyboard">
     </main>
@@ -9,5 +9,16 @@ const wrapperTemplate = () => `
 
 export const addWrapper = () => {
   const $body = $('body');
-  $body.html(wrapperTemplate())
+  $body.html(wrapperTempl())
+}
+
+const infoBlockTempl = () => `
+    <div class="key-bord__info">
+      <p>The virtual keyboard was created with Mac OS.</p>
+      <p>Change language: Ctrl+Q</p>
+    </div>
+  `
+export const addInfoBlock = () => {
+  const $keyboardBody = $('.key-bord__body');
+  $keyboardBody.$el.insertAdjacentHTML('beforeend', infoBlockTempl())
 }

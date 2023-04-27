@@ -22,3 +22,6 @@ export function createMonitor() {
       </div>
     `;
 }
+
+// <p>This virtual keyboard was created with Mac OS</p>
+// <p>Tab + q => change language</p>
