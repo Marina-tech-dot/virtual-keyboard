@@ -1,4 +1,5 @@
 import '../scss/style.scss';
+import { addWrapper } from './script.utils';
 import { VirtualKeyboard } from './components/virtualKeyboard/VirtualKeyboard';
 import { MonitorComponent } from './components/monitor/MonitiorComponent';
 import { KeyboardComponent } from './components/keyboard/KeyboardComponent';
@@ -12,6 +13,8 @@ const store = createStore(rootReducer, initialState);
 store.subscribe((state) => {
   storage('keyBoard-state', state);
 });
+
+addWrapper()
 
 const virtualKeyboard = new VirtualKeyboard('#keyboard', {
   components: [MonitorComponent, KeyboardComponent],
