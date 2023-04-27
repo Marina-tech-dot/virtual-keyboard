@@ -1,12 +1,12 @@
 import { $ } from '../../core/dom'
-import { keyBoardRows } from './keyboardKeys'
+import { keyboardRows } from './keyboardKeys'
 import { KeyboardIterator } from './keyboard.Iteratror'
 
 export function createKeyBoard($root) {
   return new Promise((resolve) => {
-    for (let i = 0; i < keyBoardRows.length; i++) {
+    for (let i = 0; i < keyboardRows.length; i++) {
       const $rootRow = $.create('div', 'key-bord__row')
-      const keyBoardRowsEl = Object.values(keyBoardRows[i][i + 1])
+      const keyBoardRowsEl = Object.values(keyboardRows[i][i + 1])
 
       keyBoardRowsEl.forEach((el) => {
         if (!el.rowIterator) {
