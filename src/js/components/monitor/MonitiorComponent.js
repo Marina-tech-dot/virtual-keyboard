@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 import { KeyBoardComponent } from '../../core/KeyBoardComponent';
 import { createMonitor } from './monitor.template';
@@ -27,7 +28,7 @@ export class MonitorComponent extends KeyBoardComponent {
       name: 'Monitor',
       listeners: ['click', 'keyup', 'keydown'],
       ...options,
-    })
+    });
   }
 
   init() {
@@ -36,6 +37,7 @@ export class MonitorComponent extends KeyBoardComponent {
     this.textarea.focus()
     this.textarea.value = this.store.getState().Textarea
     this.textarea.scrollTop = this.textarea.scrollHeight;
+    this.pressedKey = new Set()
 
     this.$on('klava:clickSimbol', (text) => {
       this.textarea.focus()
@@ -95,7 +97,6 @@ export class MonitorComponent extends KeyBoardComponent {
   }
 
   addToLS(value) {
-    console.log(value)
     this.$dispatch(actions.addToLS({
       value,
     }))
@@ -124,34 +125,46 @@ export class MonitorComponent extends KeyBoardComponent {
   }
 
   onKeydown(event) {
-    // eslint-disable-next-line no-console
-    console.log(isKeyOnVirtualKeyboard(event.key))
-    // if (isKeyOnVirtualKeyboard(event) === false) return
-    this.$emit('monic:pressedKey')
-    const pressedKey = event.key
+    this.pressedKey.add(event.code);
 
-    playSound(event, this.store)
+    if ((this.pressedKey.has('ControlLeft') || this.pressedKey.has('ControlRight')) && this.pressedKey.has('KeyQ')) {
+      console.log('Bingo!')
+      itIsLang(this.store);
+      fireCapsLangShift('Lang');
+    }
+    if (isKeyOnVirtualKeyboard(event.key) === false) {
+      event.preventDefault();
+    }
+
+    this.$emit('monic:pressedKey');
+    const pressedKey = event.key;
+
+    playSound(event, this.store);
 
     if (pressedKey === 'Tab') {
-      event.preventDefault()
+      event.preventDefault();
       document.onkeyup = () => {
-        document.onkeyup = null
-        this.$emit('klava:clickSimbol', functionalKeyValue('Tab'))
-      }
+        document.onkeyup = null;
+        this.$emit('klava:clickSimbol', functionalKeyValue('Tab'));
+      };
     }
-    lightPressedKey(event)
+    lightPressedKey(event, 'add');
 
     if (lightPressedKey(event).Lang) {
-      this.addToLS({ lastInputWasThroughKeydown: true })
-      this.addToLS(lightPressedKey(event))
-      itIsLang(this.store)
-      fireCapsLangShift('Lang')
+      this.addToLS({ lastInputWasThroughKeydown: true });
+      this.addToLS(lightPressedKey(event));
+      itIsLang(this.store);
+      fireCapsLangShift('Lang');
     }
 
-    this.addToLS({ setSelectionEnd: cursorPositionAndTextarea().currentCursorPos })
+    this.addToLS({
+      setSelectionEnd: cursorPositionAndTextarea().currentCursorPos,
+    });
   }
 
-  onKeyup() {
+  onKeyup(event) {
+    this.pressedKey.delete(event.code);
+    lightPressedKey(event, 'remove')
     this.$emit('monic:wasKeydown', this.textarea.value)
   }
 }

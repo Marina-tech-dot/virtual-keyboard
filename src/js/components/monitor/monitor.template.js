@@ -9,7 +9,7 @@ export function createMonitor() {
   return `
       <div class="monic__inner-screen">
         <div class="monic__screen" id="monic">
-          <textarea class="key-bord__text" id="written" style="${styles}"></textarea>
+          <textarea class="key-bord__text" id="written" style="${styles}" pattern="[0-9]{3}"></textarea>
           <div class="interim">
             <p class="interim__result"></p>
           </div>
@@ -25,3 +25,4 @@ export function createMonitor() {
 
 // <p>This virtual keyboard was created with Mac OS</p>
 // <p>Tab + q => change language</p>
+// pattern="[0-9A-ZА-ЯЁ]"

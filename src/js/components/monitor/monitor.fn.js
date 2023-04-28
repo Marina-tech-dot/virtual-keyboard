@@ -3,12 +3,16 @@ import { unCapitalize } from '../../core/utils'
 import { keysChangerList } from '../keyboard/keyboardKeys'
 
 export function isKeyOnVirtualKeyboard(key) {
-  const keyOnVirtKeyboard = Object.entries(keysChangerList.ru).flat()
-    .concat(Object.entries(keysChangerList.simbols).flat());
+  const smallLetters = Object.entries(keysChangerList.ru).flat()
+  const upperCasedLetters = smallLetters.map(((el) => el.toUpperCase()))
+  const keyOnVirtKeyboard = smallLetters
+    .concat(upperCasedLetters)
+    .concat(keysChangerList.functional)
+    .concat([' ']);
   return keyOnVirtKeyboard.includes(key)
 }
 
-export function lightPressedKey(event) {
+export function lightPressedKey(event, addOrRemoveClass) {
   let pressedKey = event.key
   const lang = { Lang: '' }
 
@@ -33,8 +37,10 @@ export function lightPressedKey(event) {
   const keyWrittable = $(document).find(`[data-write= "${pressedKey || unCapitalize(pressedKey)}"]`)
   const keyUnwritableCorrectName = $(document).find(`[data-functional= "${pressedKey}"]`)
   const nesesseryKey = keyWrittable || keyUnwritableCorrectName
-  if (nesesseryKey) {
-    $(nesesseryKey).addClassSetTimeout(['key-shown'], 200)
+  if (nesesseryKey && addOrRemoveClass === 'add') {
+    $(nesesseryKey).addClass(['key-shown'])
+  } else if (nesesseryKey && addOrRemoveClass === 'remove') {
+    $(nesesseryKey).removeClass(['key-shown'])
   }
 
   if (!lang.Lang) {

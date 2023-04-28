@@ -34,6 +34,13 @@ class Dom {
     return this;
   }
 
+  removeClass(classes) {
+    if (classes) {
+      this.$el.classList.remove(...classes);
+    }
+    return this;
+  }
+
   addClassSetTimeout(classes, delay) {
     if (classes) {
       for (let i = 0; i < classes.length; i++) {

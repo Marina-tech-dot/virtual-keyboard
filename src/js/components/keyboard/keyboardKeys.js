@@ -259,4 +259,17 @@ export const keysChangerList = {
     9: '9',
     0: '0',
   },
-}
+  functional: [
+    'CapsLock',
+    'Enter',
+    'ArrowRight',
+    'ArrowLeft',
+    'Space',
+    'Lang',
+    'Shift',
+    'Tab',
+    'Backspace',
+    'Sound',
+    'Microphone',
+  ],
+};
