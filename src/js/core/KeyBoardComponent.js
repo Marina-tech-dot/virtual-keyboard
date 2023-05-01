@@ -17,6 +17,10 @@ export class KeyBoardComponent extends DomListener {
     this.initDomListeners()
   }
 
+  destroy() {
+    this.removeDomListeners()
+  }
+
   $emit(event, ...arg) {
     this.emitter.emit(event, ...arg)
   }

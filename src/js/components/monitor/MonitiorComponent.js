@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import { KeyBoardComponent } from '../../core/KeyBoardComponent';
 import { createMonitor } from './monitor.template';
 import * as actions from '../../redux/actions';
@@ -127,11 +125,6 @@ export class MonitorComponent extends KeyBoardComponent {
   onKeydown(event) {
     this.pressedKey.add(event.code);
 
-    if ((this.pressedKey.has('ControlLeft') || this.pressedKey.has('ControlRight')) && this.pressedKey.has('KeyQ')) {
-      console.log('Bingo!')
-      itIsLang(this.store);
-      fireCapsLangShift('Lang');
-    }
     if (isKeyOnVirtualKeyboard(event.key) === false) {
       event.preventDefault();
     }

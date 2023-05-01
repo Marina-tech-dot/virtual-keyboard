@@ -61,7 +61,7 @@ export function itIsLang(store, isItInitialState) {
 
 export function playSound(event, store) {
   const soundsList = []
-  const soundListTitles = ['arrowLeft', 'arrowRight', 'backspace', 'capsLock', 'enter', 'lang', 'microphone', 'shift', 'sound', 'space', 'tab', 'writtenKey']
+  const soundListTitles = ['arrowleft', 'arrowright', 'backspace', 'capslock', 'enter', 'lang', 'microphone', 'shift', 'sound', 'space', 'tab', 'writtenKey']
   importAll(soundsList, require.context('../../../assets/audio/', true, /\.mp3$/))
   const soundListWithTitles = addTitleToSound(soundsList, soundListTitles)
 
@@ -74,7 +74,7 @@ export function playSound(event, store) {
   if (event.target.dataset.write || event.target.dataset.functional) {
     key = event.target.dataset.write
       ? 'writtenKey'
-      : event.target.dataset.functional;
+      : event.target.dataset.functional.toLowerCase();
   } else {
     key = soundListTitles.includes(event.key) ? event.key
       : event.key === ' ' ? 'space' : 'writtenKey';

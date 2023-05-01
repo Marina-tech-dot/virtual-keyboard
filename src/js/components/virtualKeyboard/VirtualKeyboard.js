@@ -32,6 +32,10 @@ export class VirtualKeyboard {
   render() {
     this.$el.append(this.getRoot())
     this.subscriber.subscribeComponents(this.components)
-    this.components.forEach((Component) => Component.init())
+    this.components.forEach((component) => component.init())
+  }
+
+  destroy() {
+    this.components.forEach((component) => component.destroy())
   }
 }
